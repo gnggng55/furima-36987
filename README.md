@@ -29,7 +29,7 @@
 | status_id        | integer    | null: false                    |
 | delivery_load_id | integer    | null: false                    |
 | delivery_area_id | integer    | null: false                    |
-| delivery_days_id | integer    | null: false                    |
+| delivery_day_id  | integer    | null: false                    |
 | price            | integer    | null: false                    |
 | user             | references | null: false, foreign_key :true |
 
@@ -50,7 +50,7 @@ has_one :record
 
 belongs_to :item
 belongs_to :user
-belongs_to :delivery
+has_one :delivery
 
 
 ## deliveries テーブル
