@@ -9,7 +9,7 @@ class Item < ApplicationRecord
   belongs_to :delivery_area
   belongs_to :delivery_day
 
-  validates :catecory_id, numericality: { other_than: 1 }
+  validates :category_id, numericality: { other_than: 1 }
   validates :status_id, numericality: { other_than: 1 }
   validates :delivery_load_id, numericality: { other_than: 1 }
   validates :delivery_area_id, numericality: { other_than: 1 }
