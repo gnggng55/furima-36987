@@ -23,9 +23,6 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    unless user_signed_in?
-      redirect_to action: :index
-    end
     if @item.user == current_user
       render "edit"
     else
