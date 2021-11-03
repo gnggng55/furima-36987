@@ -11,6 +11,6 @@ class DeliveryRecord
 
   def save
     record = Record.create(item_id: item_id, user_id: user_id)
-    Delivery.create(postal_code: postal_code, prefecture_id: prefecture_id, city: city, address: address, building: building, telephone_number: telephone_number, record_id: record_id)
+    Delivery.create(postal_code: postal_code, prefecture_id: prefecture_id, city: city, address: address, building: building, telephone_number: telephone_number, record_id: record.id)
   end
 end
