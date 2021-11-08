@@ -47,6 +47,21 @@ RSpec.describe DeliveryRecord, type: :model do
         @delivery_record.valid?
         expect(@delivery_record.errors.full_messages).to include("Telephone number can't be blank")
       end
+      it '電話番号が9桁以下では購入できない' do
+        @delivery_record.telephone_number = '09012345'
+        @delivery_record.valid?
+        expect(@delivery_record.errors.full_messages).to include('Telephone number is invalid')
+      end
+      it '電話番号が12桁以上では購入できない' do
+        @delivery_record.telephone_number = '090123456789'
+        @delivery_record.valid?
+        expect(@delivery_record.errors.full_messages).to include('Telephone number is invalid')
+      end
+      it '電話番号に半角数字以外が含まれている場合は購入できない' do
+        @delivery_record.telephone_number = '0901234abcd'
+        @delivery_record.valid?
+        expect(@delivery_record.errors.full_messages).to include('Telephone number is invalid')
+      end
       it 'prefecture_idが0では保存できない' do
         @delivery_record.prefecture_id = 0
         @delivery_record.valid?

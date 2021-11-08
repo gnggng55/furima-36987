@@ -1,12 +1,11 @@
 class OrdersController < ApplicationController
   before_action :set_item
   before_action :authenticate_user!, only: :index
-  before_action :move_to_index, only: :index
+  before_action :move_to_index, only: [:index, :edit]
 
 
   def index
     @delivery_record = DeliveryRecord.new
-    @item = Item.find(params[:item_id])
   end
 
   def create
