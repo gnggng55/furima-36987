@@ -1,7 +1,8 @@
 class Item < ApplicationRecord
   belongs_to :user
   has_one_attached :image
-  #has_one :record
+  has_one :record
+  
 
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :category
@@ -9,6 +10,7 @@ class Item < ApplicationRecord
   belongs_to :delivery_load
   belongs_to :delivery_area
   belongs_to :delivery_day
+  belongs_to :prefecture
 
   validates :image, presence: true
   validates :category_id, numericality: { other_than: 1 }
