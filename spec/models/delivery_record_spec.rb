@@ -2,7 +2,12 @@ require 'rails_helper'
 
 RSpec.describe DeliveryRecord, type: :model do
   before do
-    @delivery_record = FactoryBot.build(:delivery_record)
+    @user = FactoryBot.create(:user)
+    @item = FactoryBot.build(:item)
+    @item.image = fixture_file_upload("/files/hero.jpg")
+    @item.save
+    @delivery_record = FactoryBot.build(:delivery_record, user_id: @user.id, item_id: @item.id)
+    sleep(1)
   end
 
   describe '購入記録と住所の保存' do
@@ -72,13 +77,13 @@ RSpec.describe DeliveryRecord, type: :model do
         @delivery_record.valid?
         expect(@delivery_record.errors.full_messages).to include("Token can't be blank")
       end
-      it 'user_idが空では保存できない' do
-        @delivery_record.user_id = ''
+      it 'userが紐づいていいないと保存できない' do
+        @delivery_record.user_id = nil
         @delivery_record.valid?
         expect(@delivery_record.errors.full_messages).to include("User can't be blank")
       end
-      it 'item_idが空では保存できない' do
-        @delivery_record.item_id = ''
+      it 'itemが紐づいていないと保存できない' do
+        @delivery_record.item_id = nil
         @delivery_record.valid?
         expect(@delivery_record.errors.full_messages).to include("Item can't be blank")
       end
